@@ -2,6 +2,7 @@ package com.example.productprovenance;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.widget.NestedScrollView;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
@@ -18,7 +19,7 @@ public class CommercialActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_commercial);
-        ViewPager2 viewPager = findViewById(R.id.viewPagerCommercial);
+            ViewPager2 viewPager = findViewById(R.id.viewPagerCommercial);
         TabLayout tabLayout = findViewById(R.id.tabLayCommercial);
         CommercialStateAdapter commercialActivity = new CommercialStateAdapter(this);
 

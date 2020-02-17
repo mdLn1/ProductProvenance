@@ -15,14 +15,11 @@ public class CommercialStateAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 0:
-                SellFragment sellFragment = new SellFragment();
-                return sellFragment;
+                return new SellFragment();
             case 1:
-                ResellFragment resellFragment = new ResellFragment();
-                return resellFragment;
+                return new ResellFragment();
             case 2:
-                ReturnFragment returnFragment = new ReturnFragment();
-                return returnFragment;
+                return new ReturnFragment();
             default:
                 return null;
         }
