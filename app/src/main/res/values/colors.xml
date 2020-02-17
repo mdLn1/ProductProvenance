@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#118ab2</color>
+    <color name="colorPrimaryDark">#073b4c</color>
+    <color name="colorAccent">#C180FF</color>
+    <color name="colorSuccess">#06d6a0</color>
+    <color name="colorDanger">#ef476f</color>
+    <color name="colorWarning">#ffd166</color>
+    <color name="colorHint">#85adad</color>
+    <color name="colorWhite">#e3f2f0</color>
+    <color name="textColorPrimary">#e3f2f0</color>
+    <color name="toolbarIconColor">@color/textColorPrimary</color>
+    <color name="loginPageBackgroundColor">@color/colorWhite</color>
+    <color name="textInputOutlineColor">@color/colorPrimaryDark</color>
+</resources>

@@ -1,0 +1,70 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="Theme.Provenance" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
+    </style>
+    <style name="Widget.Provenance.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="hintTextAppearance">@style/TextAppearance.Provenance.TextInputLayout.HintText</item>
+        <item name="hintTextColor">@color/colorPrimaryDark</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="boxStrokeColor">@color/textInputOutlineColor</item>
+    </style>
+
+    <style name="TextAppearance.Provenance.TextInputLayout.HintText" parent="TextAppearance.MaterialComponents.Subtitle2">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="Widget.Provenance.TabLayout" parent="Widget.MaterialComponents.TabLayout">
+        <item name="android:background">@color/colorPrimaryDark</item>
+        <item name="tabIndicatorColor">@color/colorWhite</item>
+        <item name="tabTextColor">@color/colorWhite</item>
+    </style>
+
+
+    <style name="Widget.Provenance.Button" parent="Widget.MaterialComponents.Button">
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="backgroundTint">?attr/colorPrimaryDark</item>
+        <item name="android:stateListAnimator" tools:ignore="NewApi">
+            @animator/next_button_animation
+        </item>
+    </style>
+
+    <style name="Widget.Provenance.Button.Menu" parent="Widget.Provenance.Button">
+        <item name="android:layout_marginStart">20dp</item>
+        <item name="android:layout_marginEnd">20dp</item>
+        <item name="android:layout_marginBottom">18dp</item>
+        <item name="android:paddingBottom">20dp</item>
+        <item name="android:paddingTop">20dp</item>
+        <item name="android:textSize">20dp</item>
+    </style>
+
+    <style name="Widget.Provenance.Button.TextButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">?android:attr/colorPrimaryDark</item>
+    </style>
+
+    <style name="Widget.Provenance.Toolbar" parent="Widget.AppCompat.Toolbar">
+        <item name="android:background">?attr/colorPrimaryDark</item>
+        <item name="android:theme">@style/Theme.Provenance</item>
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+        <item name="titleTextAppearance">@style/TextAppearance.Provenance.Toolbar</item>
+    </style>
+
+    <style name="TextAppearance.Provenance.Toolbar" parent="TextAppearance.MaterialComponents.Button">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextAppearance.Provenance.Title" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="textAllCaps">true</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">?android:attr/colorPrimaryDark</item>
+    </style>
+
+    <style name="Widget.Provenance.Backdrop" parent="">
+        <item name="android:background">?attr/colorPrimaryDark</item>
+    </style>
+</resources>

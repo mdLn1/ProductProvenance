@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.Provenance.Button.TextButton"
+        android:id="@+id/menuItemLogin"
+        android:textColor="@color/colorWhite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/backdrop_menu_login" />
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.Provenance.Button.TextButton"
+        android:id="@+id/menuItemCommercial"
+        android:textColor="@color/colorWhite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/backdrop_menu_commercial" />
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.Provenance.Button.TextButton"
+        android:id="@+id/menuItemOption2"
+        android:textColor="@color/colorWhite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/backdrop_menu_option2" />
+
+    <View
+        android:layout_width="56dp"
+        android:layout_height="1dp"
+        android:layout_margin="16dp"
+        android:background="?android:attr/textColorPrimary" />
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.Provenance.Button.TextButton"
+        android:id="@+id/menuItemProducts"
+        android:textColor="@color/colorWhite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/backdrop_menu_products" />
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.Provenance.Button.TextButton"
+        android:id="@+id/menuItemLogout"
+        android:textColor="@color/colorWhite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/backdrop_menu_logout" />
+
+</merge>
