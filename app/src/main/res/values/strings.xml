@@ -12,11 +12,23 @@
     <string name="tab_return">Return</string>
     <string name="hint_username">Username</string>
     <string name="hint_password">Password</string>
+    <string name="hint_buyer">Buyer Name</string>
+    <string name="hint_new_buyer">New Owner</string>
+    <string name="hint_owner">Current Owner</string>
     <string name="button_login">Login</string>
     <string name="button_logout">Logout</string>
     <string name="button_next">Next</string>
+    <string name="button_qrcode_scan">Scan QR Code</string>
+    <string name="button_nfc_tag_scan">Scan Tag</string>
+    <string name="button_sale_checkout">Checkout</string>
+    <string name="button_return">Return Product</string>
+    <string name="button_resell">Change Owner</string>
     <string name="error_password">Password must contain at least 8 characters.</string>
     <string name="button_cancel">Cancel</string>
+    <string name="qr_code_content">A QR Code Image</string>
+    <string name="query_hello">Hello</string>
+    <string name="query_accounts">Accounts</string>
+    <string name="accounts_activity_title">Please select an account</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

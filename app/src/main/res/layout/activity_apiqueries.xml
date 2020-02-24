@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLinLay"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:weightSum="60"
+    tools:context=".APIQueries">
+
+    <TextView
+        android:id="@+id/resultTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="10"
+        android:text="Result:" />
+
+    <LinearLayout
+        android:id="@+id/childLinLay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_weight="50"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/accountsButton"
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="18dp"
+            android:layout_weight="10"
+            android:text="@string/query_accounts" />
+
+        <Button
+            android:id="@+id/helloButton"
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="18dp"
+            android:layout_weight="10"
+            android:text="@string/query_hello" />
+
+        <Button
+            android:id="@+id/pickAccountButton"
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="18dp"
+            android:layout_weight="10"
+            android:text="select account" />
+    </LinearLayout>
+
+</LinearLayout>
