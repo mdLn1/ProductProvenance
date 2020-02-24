@@ -6,6 +6,11 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 public class CommercialStateAdapter extends FragmentStateAdapter {
+
+    private SellFragment sellFragment;
+    private ResellFragment resellFragment;
+    private ReturnFragment returnFragment;
+
     public CommercialStateAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
     }
@@ -15,13 +20,26 @@ public class CommercialStateAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 0:
-                return new SellFragment();
+                sellFragment = new SellFragment();
+                return sellFragment;
             case 1:
-                return new ResellFragment();
+                resellFragment = new ResellFragment();
+                return resellFragment;
             case 2:
-                return new ReturnFragment();
+                returnFragment = new ReturnFragment();
+                return returnFragment;
             default:
-                return null;
+                return new SellFragment();
+        }
+    }
+
+    public CommercialActions getCurrentFragment(int position) {
+        if (position == 0) {
+            return sellFragment;
+        } else if (position == 1) {
+            return  resellFragment;
+        } else {
+            return returnFragment;
         }
     }
 

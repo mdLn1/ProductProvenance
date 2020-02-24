@@ -20,6 +20,7 @@ public final class Constants {
 
     // WEB API REQUESTS
     public static final String ROUTE_DEFAULT = "http://192.168.0.10:5000/";
+
     public static final String GET_ACCOUNTS = ROUTE_DEFAULT + "accounts";
     public static final String GET_PRODUCT_DETAILS = ROUTE_DEFAULT + "product-details";
     public static final String GET_ALL_PRODUCTS = ROUTE_DEFAULT + "all-products";
@@ -33,10 +34,15 @@ public final class Constants {
     public static final String POST_RESELL_PRODUCT = ROUTE_DEFAULT + "resell-product";
     public static final String POST_SELL_PRODUCT = ROUTE_DEFAULT + "sell-product";
     public static final String POST_EDIT_PRODUCT = ROUTE_DEFAULT + "edit-product";
-    private static final String TRACKER_CONTRACT = "0x3449BB31ad95585Fe455b0713d2286a3FEcf0a50";
-    private static final String PRODUCT_ON_CHAIN = "0x000000000000000000000000b78728350da4bf2cc308ab081eb8eea3a3be34d4";
+
+    public static final String TRACKER_CONTRACT = "0x3449BB31ad95585Fe455b0713d2286a3FEcf0a50";
+    public static final String PRODUCT_ON_CHAIN = "0x000000000000000000000000b78728350da4bf2cc308ab081eb8eea3a3be34d4";
+
     public static final int GET_REQUEST = Request.Method.GET;
     public static final int POST_REQUEST = Request.Method.POST;
+
+    public static final int QR_SCAN_ACTION = 1001;
+    public static final int NFC_SCAN_ACTION = 1002;
 
     // POPULATING ACCOUNTS HASHMAP WITH VALUES
     static {

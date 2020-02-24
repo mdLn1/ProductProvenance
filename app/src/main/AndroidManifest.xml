@@ -30,11 +30,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Provenance">
+        <activity android:name=".SimpleTestActivity"></activity>
         <activity android:name=".QRCodeGeneratorActivity" />
         <activity android:name=".AccountsActivity" />
         <activity android:name=".APIQueries" />
         <activity android:name=".QRScanActivity" />
-        <activity android:name=".CommercialActivity"></activity>
+        <activity android:name=".CommercialActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -17,13 +17,15 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import static com.example.productprovenance.Utils.hideKeyboardFrom;
 
-public class ResellFragment extends Fragment implements View.OnClickListener {
+public class ResellFragment extends Fragment implements View.OnClickListener, CommercialActions {
     private int step = 1;
     private Button buttonQRCodeScan, buttonNFCTagScan, buttonResellProduct;
     private TextInputEditText inputNewBuyerText;
     private TextInputLayout inputNewBuyerLayout;
     private TextInputEditText inputOwnerText;
     private TextInputLayout inputOwnerLayout;
+    private CommercialActivity parentActivity;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -32,6 +34,8 @@ public class ResellFragment extends Fragment implements View.OnClickListener {
         buttonQRCodeScan = view.findViewById(R.id.buttonQRCodeScan);
         buttonNFCTagScan = view.findViewById(R.id.buttonNFCTagScan);
         buttonResellProduct = view.findViewById(R.id.buttonResellProduct);
+
+        parentActivity = (CommercialActivity) getActivity();
 
         inputNewBuyerLayout = view.findViewById(R.id.inputNewBuyer);
         inputNewBuyerText = view.findViewById(R.id.inputNewBuyerText);
@@ -71,24 +75,13 @@ public class ResellFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.buttonQRCodeScan:
-                step += 1;
-                buttonNFCTagScan.setEnabled(true);
-                buttonResellProduct.setVisibility(View.VISIBLE);
-                inputOwnerLayout.setVisibility(View.VISIBLE);
-                inputNewBuyerLayout.setVisibility(View.VISIBLE);
-                buttonNFCTagScan.setBackgroundColor(getActivity().getResources().getColor(R.color.colorPrimaryDark, getActivity().getTheme()));
-                Toast.makeText(getActivity(), "ScanQRCode", Toast.LENGTH_SHORT).show();
+                parentActivity.onClick(v);
                 break;
             case R.id.buttonNFCTagScan:
                 if (step < 2) {
                     Toast.makeText(getActivity(), "You need to do step 1 first", Toast.LENGTH_SHORT).show();
                 } else {
-                    step += 1;
-                    buttonResellProduct.setEnabled(true);
-                    inputNewBuyerLayout.setEnabled(true);
-                    inputOwnerLayout.setEnabled(true);
-                    buttonResellProduct.setBackgroundColor(getActivity().getResources().getColor(R.color.colorPrimaryDark, getActivity().getTheme()));
-                    Toast.makeText(getActivity(), "ScanNFCTag", Toast.LENGTH_SHORT).show();
+                    parentActivity.onClick(v);
                 }
                 break;
             case R.id.buttonResellProduct:
@@ -106,8 +99,8 @@ public class ResellFragment extends Fragment implements View.OnClickListener {
                         buttonNFCTagScan.setBackgroundColor(getActivity().getResources().getColor(R.color.colorDisabled, getActivity().getTheme()));
 
                         buttonResellProduct.setEnabled(false);
-                        buttonResellProduct.setVisibility(View.INVISIBLE);
                         buttonResellProduct.setBackgroundColor(getActivity().getResources().getColor(R.color.colorDisabled, getActivity().getTheme()));
+                        buttonResellProduct.setVisibility(View.INVISIBLE);
 
                         inputOwnerText.setText(null);
                         inputOwnerText.clearFocus();
@@ -131,5 +124,25 @@ public class ResellFragment extends Fragment implements View.OnClickListener {
             default:
                 Toast.makeText(getActivity(), "Just a click", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void onQRScan() {
+        step += 1;
+        buttonNFCTagScan.setEnabled(true);
+        buttonResellProduct.setEnabled(false);
+        buttonResellProduct.setVisibility(View.VISIBLE);
+        inputOwnerLayout.setVisibility(View.VISIBLE);
+        inputNewBuyerLayout.setVisibility(View.VISIBLE);
+        buttonNFCTagScan.setBackgroundColor(getActivity().getResources().getColor(R.color.colorPrimaryDark, getActivity().getTheme()));
+    }
+
+    @Override
+    public void onNFCScan() {
+        step += 1;
+        buttonResellProduct.setEnabled(true);
+        inputNewBuyerLayout.setEnabled(true);
+        inputOwnerLayout.setEnabled(true);
+        buttonResellProduct.setBackgroundColor(getActivity().getResources().getColor(R.color.colorPrimaryDark, getActivity().getTheme()));
     }
 }

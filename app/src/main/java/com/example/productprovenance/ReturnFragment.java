@@ -18,12 +18,13 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import static com.example.productprovenance.Utils.hideKeyboardFrom;
 
-public class ReturnFragment extends Fragment implements OnClickListener {
+public class ReturnFragment extends Fragment implements OnClickListener, CommercialActions {
 
     private int step = 1;
     private Button buttonQRCodeScan, buttonNFCTagScan, buttonReturnProduct;
     private TextInputEditText inputOwnerText;
     private TextInputLayout inputOwnerLayout;
+    private CommercialActivity parentActivity;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -34,6 +35,8 @@ public class ReturnFragment extends Fragment implements OnClickListener {
         buttonQRCodeScan = view.findViewById(R.id.buttonQRCodeScan);
         buttonNFCTagScan = view.findViewById(R.id.buttonNFCTagScan);
         buttonReturnProduct  = view.findViewById(R.id.buttonReturnProduct);
+
+        parentActivity = (CommercialActivity) getActivity();
 
         inputOwnerLayout = view.findViewById(R.id.inputOwner);
         inputOwnerText = view.findViewById(R.id.inputOwnerText);
@@ -61,24 +64,13 @@ public class ReturnFragment extends Fragment implements OnClickListener {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.buttonQRCodeScan:
-                step += 1;
-                buttonNFCTagScan.setEnabled(true);
-                buttonReturnProduct.setEnabled(false);
-                buttonReturnProduct.setVisibility(View.VISIBLE);
-                inputOwnerLayout.setVisibility(View.VISIBLE);
-                inputOwnerText.setEnabled(false);
-                buttonNFCTagScan.setBackgroundColor(getActivity().getResources().getColor(R.color.colorPrimaryDark, getActivity().getTheme()));
-                Toast.makeText(getActivity(), "ScanQRCode", Toast.LENGTH_SHORT).show();
+                parentActivity.onClick(v);
                 break;
             case R.id.buttonNFCTagScan:
                 if(step < 2) {
                     Toast.makeText(getActivity(), "You need to do step 1 first", Toast.LENGTH_SHORT).show();
                 } else {
-                    step += 1;
-                    buttonReturnProduct.setEnabled(true);
-                    inputOwnerLayout.setEnabled(true);
-                    buttonReturnProduct.setBackgroundColor(getActivity().getResources().getColor(R.color.colorPrimaryDark, getActivity().getTheme()));
-                    Toast.makeText(getActivity(), "ScanNFCTag", Toast.LENGTH_SHORT).show();
+                    parentActivity.onClick(v);
                 }
                 break;
             case R.id.buttonReturnProduct:
@@ -110,5 +102,23 @@ public class ReturnFragment extends Fragment implements OnClickListener {
             default:
                 Toast.makeText(getActivity(), "Just a click", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void onQRScan() {
+        step += 1;
+        buttonNFCTagScan.setEnabled(true);
+        buttonReturnProduct.setEnabled(false);
+        buttonReturnProduct.setVisibility(View.VISIBLE);
+        inputOwnerLayout.setVisibility(View.VISIBLE);
+        buttonNFCTagScan.setBackgroundColor(getActivity().getResources().getColor(R.color.colorPrimaryDark, getActivity().getTheme()));
+    }
+
+    @Override
+    public void onNFCScan() {
+        step += 1;
+        buttonReturnProduct.setEnabled(true);
+        inputOwnerLayout.setEnabled(true);
+        buttonReturnProduct.setBackgroundColor(getActivity().getResources().getColor(R.color.colorPrimaryDark, getActivity().getTheme()));
     }
 }
