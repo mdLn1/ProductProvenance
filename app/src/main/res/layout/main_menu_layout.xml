@@ -20,12 +20,12 @@
         android:textSize="30sp" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonLogin"
+        android:id="@+id/buttonQRCodeScan"
         style="@style/Widget.Provenance.Button.Menu"
         android:layout_marginTop="26dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/button_login" />
+        android:text="@string/button_qrcode_scan" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonLogout"

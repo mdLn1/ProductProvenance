@@ -24,6 +24,9 @@
     <string name="button_return">Return Product</string>
     <string name="button_resell">Change Owner</string>
     <string name="error_password">Password must contain at least 8 characters.</string>
+    <string name="error_buyer">Buyer name must be at least 8 characters long</string>
+    <string name="error_owner">Owner name must be at least 8 characters long</string>
+    <string name="error_new_buyer">new Buyer name must be at least 8 characters long</string>
     <string name="button_cancel">Cancel</string>
     <string name="qr_code_content">A QR Code Image</string>
     <string name="query_hello">Hello</string>

@@ -20,6 +20,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 public class MainFragment extends Fragment implements View.OnClickListener{
+    private MainActivity parentActivity;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,13 +35,14 @@ public class MainFragment extends Fragment implements View.OnClickListener{
         View view = inflater.inflate(R.layout.main_fragment, container, false);
         // Set up the tool bar
         setUpToolbar(view);
+        parentActivity = (MainActivity)getActivity();
         // Set cut corner background for API 23+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             view.findViewById(R.id.nested_grid)
                     .setBackgroundResource(R.drawable.grid_shape_background);
         }
 
-        Button buttonLogin = view.findViewById(R.id.buttonLogin),
+        Button buttonQRScan = view.findViewById(R.id.buttonQRCodeScan),
                 buttonLogout = view.findViewById(R.id.buttonLogout),
                 menuItemLogin = view.findViewById(R.id.menuItemLogin),
                 menuItemLogout = view.findViewById(R.id.menuItemLogout),
@@ -49,7 +51,7 @@ public class MainFragment extends Fragment implements View.OnClickListener{
                 buttonNext  = view.findViewById(R.id.buttonNext);
 
 
-        buttonLogin.setOnClickListener(this);
+        buttonQRScan.setOnClickListener(this);
         buttonLogout.setOnClickListener(this);
         menuItemLogin.setOnClickListener(this);
         menuItemLogout.setOnClickListener(this);
@@ -90,14 +92,8 @@ public class MainFragment extends Fragment implements View.OnClickListener{
             case R.id.menuItemLogout:
                 Toast.makeText(getActivity(), "Logged out", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.menuItemProducts:
-                Toast.makeText(getActivity(), "My Products", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.menuItemCommercial:
-                startActivity(new Intent(getActivity(), CommercialActivity.class));
-                break;
             default:
-                Toast.makeText(getActivity(), "Just a click", Toast.LENGTH_SHORT).show();
+                parentActivity.onClick(v);
         }
     }
 

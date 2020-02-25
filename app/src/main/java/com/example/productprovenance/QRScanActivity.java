@@ -15,8 +15,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.zxing.Result;
+
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
+
 import static android.Manifest.permission.CAMERA;
 
 public class QRScanActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler {
@@ -43,7 +46,7 @@ public class QRScanActivity extends AppCompatActivity implements ZXingScannerVie
     }
 
     private boolean checkPermission() {
-        return ( ContextCompat.checkSelfPermission(getApplicationContext(), CAMERA ) == PackageManager.PERMISSION_GRANTED);
+        return (ContextCompat.checkSelfPermission(getApplicationContext(), CAMERA) == PackageManager.PERMISSION_GRANTED);
     }
 
     private void requestPermission() {
@@ -56,9 +59,9 @@ public class QRScanActivity extends AppCompatActivity implements ZXingScannerVie
                 if (grantResults.length > 0) {
 
                     boolean cameraAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-                    if (cameraAccepted){
+                    if (cameraAccepted) {
                         Toast.makeText(getApplicationContext(), "Permission Granted, Now you can access camera", Toast.LENGTH_LONG).show();
-                    }else {
+                    } else {
                         Toast.makeText(getApplicationContext(), "Permission Denied, You cannot access and camera", Toast.LENGTH_LONG).show();
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                             if (shouldShowRequestPermissionRationale(CAMERA)) {
@@ -97,7 +100,7 @@ public class QRScanActivity extends AppCompatActivity implements ZXingScannerVie
         int currentapiVersion = android.os.Build.VERSION.SDK_INT;
         if (currentapiVersion >= android.os.Build.VERSION_CODES.M) {
             if (checkPermission()) {
-                if(mScannerView == null) {
+                if (mScannerView == null) {
                     mScannerView = new ZXingScannerView(this);
                     setContentView(mScannerView);
                 }
@@ -119,26 +122,27 @@ public class QRScanActivity extends AppCompatActivity implements ZXingScannerVie
     public void handleResult(Result rawResult) {
 
         final String result = rawResult.getText();
-        Log.d("QRCodeScanner", rawResult.getText());
-        Log.d("QRCodeScanner", rawResult.getBarcodeFormat().toString());
+//        Log.d("QRCodeScanner", rawResult.getText());
+//        Log.d("QRCodeScanner", rawResult.getBarcodeFormat().toString());
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Scan Result");
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                mScannerView.resumeCameraPreview(QRScanActivity.this);
-            }
-        });
-        builder.setNeutralButton("Visit", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(result));
-                startActivity(browserIntent);
-            }
-        });
-        builder.setMessage(rawResult.getText());
-        AlertDialog alert1 = builder.create();
-        alert1.show();
+        new MaterialAlertDialogBuilder(this)
+                .setTitle("Successfully scanned")
+                .setMessage("Do you wish to continue ?")
+                .setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent();
+                        intent.putExtra(Constants.GET_SCANNED_QR_DATA, result);
+                        setResult(RESULT_OK);
+                        finish();
+                    }
+                })
+                .setNeutralButton("Scan Again", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mScannerView.resumeCameraPreview(QRScanActivity.this);
+                    }
+                })
+                .show();
     }
 }

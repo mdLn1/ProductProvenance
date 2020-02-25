@@ -13,6 +13,13 @@ public final class Constants {
     public static final int PICK_ACCOUNT_REQUEST = 1001;
     public static final int SELECT_ACCOUNT_REQUEST = 1002;
 
+    public static final int QR_SCAN_ACTION = 1101;
+    public static final int NFC_SCAN_ACTION = 1102;
+
+    // Intent extras
+    public static final String GET_SCANNED_QR_DATA = "getScannedQRData";
+    public static final String GET_SCANNED_NFC_DATA = "getScannedNFCData";
+
     // SHARED PREFERENCES VARIABLES
     public static final String userDataStore = "userDetails";
     public static final String accountAddress = "accountAddress";
@@ -41,8 +48,7 @@ public final class Constants {
     public static final int GET_REQUEST = Request.Method.GET;
     public static final int POST_REQUEST = Request.Method.POST;
 
-    public static final int QR_SCAN_ACTION = 1001;
-    public static final int NFC_SCAN_ACTION = 1002;
+
 
     // POPULATING ACCOUNTS HASHMAP WITH VALUES
     static {

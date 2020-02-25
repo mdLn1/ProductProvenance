@@ -25,6 +25,8 @@ public class ReturnFragment extends Fragment implements OnClickListener, Commerc
     private TextInputEditText inputOwnerText;
     private TextInputLayout inputOwnerLayout;
     private CommercialActivity parentActivity;
+    private String qrCode;
+    private String nfcCode;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -78,7 +80,7 @@ public class ReturnFragment extends Fragment implements OnClickListener, Commerc
                     Toast.makeText(getActivity(), "You need to do step 2 first", Toast.LENGTH_SHORT).show();
                 } else {
                     if (!isInputValid(inputOwnerText.getText())) {
-                        inputOwnerLayout.setError(getString(R.string.error_password));
+                        inputOwnerLayout.setError(getString(R.string.error_owner));
                     } else {
                         Toast.makeText(getActivity(), "SaleCheckout", Toast.LENGTH_SHORT).show();
                         buttonNFCTagScan.setEnabled(false);
@@ -105,8 +107,9 @@ public class ReturnFragment extends Fragment implements OnClickListener, Commerc
     }
 
     @Override
-    public void onQRScan() {
+    public void onQRScan(String qrCode) {
         step += 1;
+        this.qrCode = qrCode;
         buttonNFCTagScan.setEnabled(true);
         buttonReturnProduct.setEnabled(false);
         buttonReturnProduct.setVisibility(View.VISIBLE);
@@ -115,8 +118,9 @@ public class ReturnFragment extends Fragment implements OnClickListener, Commerc
     }
 
     @Override
-    public void onNFCScan() {
+    public void onNFCScan(String nfcCode) {
         step += 1;
+        this.nfcCode = nfcCode;
         buttonReturnProduct.setEnabled(true);
         inputOwnerLayout.setEnabled(true);
         buttonReturnProduct.setBackgroundColor(getActivity().getResources().getColor(R.color.colorPrimaryDark, getActivity().getTheme()));

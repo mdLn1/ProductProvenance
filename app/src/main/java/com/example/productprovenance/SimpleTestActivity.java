@@ -19,6 +19,7 @@ public class SimpleTestActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent returnIntent = new Intent();
+                returnIntent.putExtra(Constants.GET_SCANNED_QR_DATA, "Something precious");
                 setResult(Activity.RESULT_OK, returnIntent);
                 finish();
             }

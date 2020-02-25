@@ -30,6 +30,8 @@ public class SellFragment extends Fragment implements OnClickListener, Commercia
     private TextInputEditText inputBuyerText;
     private TextInputLayout inputBuyerLayout;
     private CommercialActivity parentActivity;
+    private String qrCode;
+    private String nfcCode;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -83,7 +85,7 @@ public class SellFragment extends Fragment implements OnClickListener, Commercia
                     Toast.makeText(getActivity(), "You need to do step 2 first", Toast.LENGTH_SHORT).show();
                 } else {
                     if (!isInputValid(inputBuyerText.getText())) {
-                        inputBuyerLayout.setError(getString(R.string.error_password));
+                        inputBuyerLayout.setError(getString(R.string.error_buyer));
                     } else {
                         inputBuyerLayout.setError(null);
                         Toast.makeText(getActivity(), "SaleCheckout", Toast.LENGTH_SHORT).show();
@@ -112,8 +114,9 @@ public class SellFragment extends Fragment implements OnClickListener, Commercia
     }
 
     @Override
-    public void onQRScan() {
+    public void onQRScan(String qrCode) {
         step += 1;
+        this.qrCode = qrCode;
         buttonNFCTagScan.setEnabled(true);
         buttonSaleCheckout.setEnabled(false);
         buttonSaleCheckout.setVisibility(View.VISIBLE);
@@ -123,8 +126,9 @@ public class SellFragment extends Fragment implements OnClickListener, Commercia
     }
 
     @Override
-    public void onNFCScan() {
+    public void onNFCScan(String nfcCode) {
         step += 1;
+        this.nfcCode = nfcCode;
         buttonSaleCheckout.setEnabled(true);
         inputBuyerLayout.setEnabled(true);
         buttonSaleCheckout.setBackgroundColor(getActivity().getResources().getColor(R.color.colorPrimaryDark, getActivity().getTheme()));

@@ -1,6 +1,6 @@
 package com.example.productprovenance;
 
 public interface CommercialActions {
-    void onQRScan();
-    void onNFCScan();
+    void onQRScan(String qrCode);
+    void onNFCScan(String nfcCode);
 }

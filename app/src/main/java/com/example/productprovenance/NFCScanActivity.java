@@ -1,8 +1,10 @@
 package com.example.productprovenance;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.PendingIntent;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
@@ -19,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.productprovenance.record.NdefMessageParser;
 import com.example.productprovenance.record.ParsedNdefRecord;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 
 import java.util.List;
@@ -27,6 +30,7 @@ public class NFCScanActivity extends AppCompatActivity {
     private TextView text;
     private  NfcAdapter nfcAdapter;
     private  PendingIntent pendingIntent;
+    private String resultNFCScan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +90,6 @@ public class NFCScanActivity extends AppCompatActivity {
     private void displayMsgs(NdefMessage[] msgs) {
         if (msgs == null || msgs.length == 0)
             return;
-
         StringBuilder builder = new StringBuilder();
         List<ParsedNdefRecord> records = NdefMessageParser.parse(msgs[0]);
         final int size = records.size();
@@ -97,7 +100,24 @@ public class NFCScanActivity extends AppCompatActivity {
             builder.append(str).append("\n");
         }
 
-        text.setText(builder.toString());
+        resultNFCScan = builder.toString();
+        Toast.makeText(getApplicationContext(), "Successfull send", Toast.LENGTH_SHORT).show();
+
+        new MaterialAlertDialogBuilder(this)
+                .setTitle("Successfully scanned")
+                .setMessage("Do you wish to continue ?")
+                .setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent( );
+                        intent.putExtra(Constants.GET_SCANNED_NFC_DATA, resultNFCScan);
+                        setResult(RESULT_OK);
+                        finish();
+                    }
+                })
+                .setNeutralButton("Scan Again", null)
+                .show();
+
     }
 
     @Override

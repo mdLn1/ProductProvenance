@@ -41,9 +41,11 @@ public class CommercialActivity extends AppCompatActivity implements View.OnClic
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK){
             if(requestCode == Constants.NFC_SCAN_ACTION) {
-                commercialActivityAdapter.getCurrentFragment(viewPager.getCurrentItem()).onNFCScan();
+                String nfcData = data.getStringExtra(Constants.GET_SCANNED_NFC_DATA);
+                commercialActivityAdapter.getCurrentFragment(viewPager.getCurrentItem()).onNFCScan(nfcData);
             } else if (requestCode == Constants.QR_SCAN_ACTION) {
-                commercialActivityAdapter.getCurrentFragment(viewPager.getCurrentItem()).onQRScan();
+                String qrData = data.getStringExtra(Constants.GET_SCANNED_QR_DATA);
+                commercialActivityAdapter.getCurrentFragment(viewPager.getCurrentItem()).onQRScan(qrData);
             }
         } else if(resultCode == RESULT_CANCELED) {
             if(requestCode == Constants.NFC_SCAN_ACTION) {
@@ -63,7 +65,7 @@ public class CommercialActivity extends AppCompatActivity implements View.OnClic
                 startActivityForResult(new Intent(this, SimpleTestActivity.class),Constants.QR_SCAN_ACTION);
                 break;
             case R.id.buttonNFCTagScan:
-                startActivityForResult(new Intent(this, SimpleTestActivity.class), Constants.NFC_SCAN_ACTION);
+                startActivityForResult(new Intent(this, NFCScanActivity.class), Constants.NFC_SCAN_ACTION);
                 break;
             default:
                 Toast.makeText(this, "blafsasf", Toast.LENGTH_SHORT).show();

@@ -25,7 +25,8 @@ public class ResellFragment extends Fragment implements View.OnClickListener, Co
     private TextInputEditText inputOwnerText;
     private TextInputLayout inputOwnerLayout;
     private CommercialActivity parentActivity;
-
+    private String qrCode;
+    private String nfcCode;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -89,9 +90,9 @@ public class ResellFragment extends Fragment implements View.OnClickListener, Co
                     Toast.makeText(getActivity(), "You need to do step 2 first", Toast.LENGTH_SHORT).show();
                 } else {
                     if (!isInputValid(inputOwnerText.getText())) {
-                        inputOwnerLayout.setError(getString(R.string.error_password));
+                        inputOwnerLayout.setError(getString(R.string.error_owner));
                     } else if (!isInputValid(inputNewBuyerText.getText())) {
-                        inputNewBuyerLayout.setError(getString(R.string.error_password));
+                        inputNewBuyerLayout.setError(getString(R.string.error_new_buyer));
                     } else {
                         Toast.makeText(getActivity(), "SaleCheckout", Toast.LENGTH_SHORT).show();
 
@@ -127,8 +128,9 @@ public class ResellFragment extends Fragment implements View.OnClickListener, Co
     }
 
     @Override
-    public void onQRScan() {
+    public void onQRScan(String qrCode) {
         step += 1;
+        this.qrCode = qrCode;
         buttonNFCTagScan.setEnabled(true);
         buttonResellProduct.setEnabled(false);
         buttonResellProduct.setVisibility(View.VISIBLE);
@@ -138,8 +140,9 @@ public class ResellFragment extends Fragment implements View.OnClickListener, Co
     }
 
     @Override
-    public void onNFCScan() {
+    public void onNFCScan(String nfcCode) {
         step += 1;
+        this.nfcCode = nfcCode;
         buttonResellProduct.setEnabled(true);
         inputNewBuyerLayout.setEnabled(true);
         inputOwnerLayout.setEnabled(true);
