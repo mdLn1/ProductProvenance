@@ -5,8 +5,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -19,11 +21,13 @@ public class MainActivity extends AppCompatActivity implements NavigationHost, V
     private FragmentTransaction fragmentTransaction;
     private static final String MainFragmentTAG = "MainFragment";
     private static final String LoginFragmentTag = "LoginFragment";
+    private SharedPreferences sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        sharedPref = getSharedPreferences(Constants.userDataStore, Context.MODE_PRIVATE);
 
         fragmentManager=getSupportFragmentManager();
 
@@ -106,6 +110,22 @@ public class MainActivity extends AppCompatActivity implements NavigationHost, V
                 fragmentData.putString(Constants.GET_SCANNED_QR_DATA, qrData);
                 productDetailsFragment.setArguments(fragmentData);//F
                 navigateTo(productDetailsFragment, true);
+            } else if (requestCode == Constants.SKIP_LOGIN_ACTION) {
+                String chosenAccount = data.getStringExtra(Constants.GET_SELECTED_ACCOUNT_DATA);
+                if(Constants.accounts.containsKey(chosenAccount)) {
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putString(Constants.accountAddress, Constants.accounts.get(chosenAccount));
+                    editor.putString(Constants.accountName, chosenAccount);
+                    editor.commit();
+                    MainFragment fragment = (MainFragment)getSupportFragmentManager().findFragmentByTag(MainFragmentTAG);
+                    if(fragment != null){
+                        fragment.checkLoginStatus();
+                    }
+                } else {
+                    Toast.makeText(this, "Invalid Selection", Toast.LENGTH_LONG);
+
+                }
+
             }
         } else if(resultCode == RESULT_CANCELED) {
             if (requestCode == Constants.QR_SCAN_ACTION) {
@@ -118,21 +138,25 @@ public class MainActivity extends AppCompatActivity implements NavigationHost, V
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.skipButton:
+                startActivityForResult(new Intent(this, AccountsActivity.class), Constants.SKIP_LOGIN_ACTION);
+                break;
             case R.id.menuItemProducts:
                 Toast.makeText(this, "My Products", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.buttonLogout:
-                new MaterialAlertDialogBuilder(this)
-                        .setTitle("Confirm scan")
-                        .setMessage("Scanned Successfully")
-                        .setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(getApplicationContext(), "Main Clicking", Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .setNeutralButton("Scan Again", null)
-                        .show();
+//                new MaterialAlertDialogBuilder(this)
+//                        .setTitle("Confirm scan")
+//                        .setMessage("Scanned Successfully")
+//                        .setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                Toast.makeText(getApplicationContext(), "Main Clicking", Toast.LENGTH_SHORT).show();
+//                            }
+//                        })
+//                        .setNeutralButton("Scan Again", null)
+//                        .show();
+                navigateTo(new CreateUserFragment(),true);
                 break;
             case R.id.menuItemCommercial:
                 startActivity(new Intent(this, CommercialActivity.class));

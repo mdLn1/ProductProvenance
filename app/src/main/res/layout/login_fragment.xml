@@ -75,7 +75,18 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:text="@string/button_next" />
+                android:text="@string/button_next_main_menu" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/skipButton"
+                style="@style/Widget.Provenance.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_toStartOf="@id/next_button"
+                android:layout_toLeftOf="@id/next_button"
+                android:text="Skip" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/cancel_button"
@@ -84,8 +95,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="12dp"
                 android:layout_marginRight="12dp"
-                android:layout_toStartOf="@id/next_button"
-                android:layout_toLeftOf="@id/next_button"
+                android:layout_toStartOf="@id/skipButton"
+                android:layout_toLeftOf="@id/skipButton"
                 android:text="@string/button_cancel" />
 
         </RelativeLayout>

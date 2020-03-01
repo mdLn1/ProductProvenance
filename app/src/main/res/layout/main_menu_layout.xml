@@ -19,13 +19,53 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="30sp" />
 
+
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonQRCodeScan"
-        style="@style/Widget.Provenance.Button.Menu"
+        android:id="@+id/buttonCreateUserMainMenu"
         android:layout_marginTop="26dp"
+        style="@style/Widget.Provenance.Button.Menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/button_qrcode_scan" />
+        android:visibility="gone"
+        android:text="@string/button_create_user_main_menu" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonAddProductMainMenu"
+        style="@style/Widget.Provenance.Button.Menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="@string/button_add_product_main_menu" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonTransferProductMainMenu"
+        style="@style/Widget.Provenance.Button.Menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="@string/button_transfer_product_main_menu" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonShowAccountQRMainMenu"
+        style="@style/Widget.Provenance.Button.Menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="@string/button_show_account_qr_main_menu" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonQRCodeScanMainMenu"
+        style="@style/Widget.Provenance.Button.Menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_qrcode_scan_main_menu" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonNext"
+        style="@style/Widget.Provenance.Button.Menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_next_main_menu" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonLogout"
@@ -33,12 +73,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/button_logout" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonNext"
-        style="@style/Widget.Provenance.Button.Menu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/button_next" />
 
 </LinearLayout>

@@ -12,6 +12,7 @@
     <com.google.android.material.button.MaterialButton
         style="@style/Widget.Provenance.Button.TextButton"
         android:id="@+id/menuItemCommercial"
+        android:visibility="gone"
         android:textColor="@color/colorWhite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

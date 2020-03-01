@@ -15,10 +15,12 @@ public final class Constants {
 
     public static final int QR_SCAN_ACTION = 1101;
     public static final int NFC_SCAN_ACTION = 1102;
+    public static final int SKIP_LOGIN_ACTION = 1190;
 
     // Intent extras
     public static final String GET_SCANNED_QR_DATA = "getScannedQRData";
     public static final String GET_SCANNED_NFC_DATA = "getScannedNFCData";
+    public static final String GET_SELECTED_ACCOUNT_DATA = "loginAccountAddress";
 
     // SHARED PREFERENCES VARIABLES
     public static final String userDataStore = "userDetails";

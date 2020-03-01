@@ -38,7 +38,7 @@ public class AccountsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent returnIntent = new Intent();
-                returnIntent.putExtra("chosenAccount",accountsList.get(position).toString());
+                returnIntent.putExtra(Constants.GET_SELECTED_ACCOUNT_DATA,accountsList.get(position).toString());
                 setResult(Activity.RESULT_OK,returnIntent);
                 finish();
             }

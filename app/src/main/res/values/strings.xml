@@ -1,33 +1,51 @@
 <resources>
     <string name="app_name">Product Provenance</string>
+    <string name="text_create_user">Create User</string>
+
     <string name="backdrop_menu_products">My Products</string>
     <string name="backdrop_menu_commercial">Commercial</string>
     <string name="backdrop_menu_login">Login</string>
     <string name="backdrop_menu_logout">Log Out</string>
     <string name="backdrop_menu_option2">Option 2</string>
+
     <string name="toolbar_menu_search">Search</string>
     <string name="toolbar_menu_filter">Filter</string>
+
     <string name="tab_sell">Sell</string>
     <string name="tab_resell">Resell</string>
     <string name="tab_return">Return</string>
+
     <string name="hint_username">Username</string>
     <string name="hint_password">Password</string>
     <string name="hint_buyer">Buyer Name</string>
     <string name="hint_new_buyer">New Owner</string>
     <string name="hint_owner">Current Owner</string>
+    <string name="hint_location">Main Location</string>
+    <string name="hint_role">Role</string>
+    <string name="hint_account_address">Account Address</string>
+
+    <string name="button_create_user_main_menu">Create User</string>
+    <string name="button_add_product_main_menu">Add Product</string>
+    <string name="button_transfer_product_main_menu">Transfer Product</string>
+    <string name="button_show_account_qr_main_menu">Show Account QR</string>
+    <string name="button_qrcode_scan_main_menu">Scan QR Code</string>
+
     <string name="button_login">Login</string>
     <string name="button_logout">Logout</string>
-    <string name="button_next">Next</string>
+    <string name="button_next_main_menu">Next</string>
     <string name="button_qrcode_scan">Scan QR Code</string>
     <string name="button_nfc_tag_scan">Scan Tag</string>
     <string name="button_sale_checkout">Checkout</string>
     <string name="button_return">Return Product</string>
     <string name="button_resell">Change Owner</string>
+    <string name="button_create_user">Submit</string>
+    <string name="button_cancel">Cancel</string>
+
     <string name="error_password">Password must contain at least 8 characters.</string>
     <string name="error_buyer">Buyer name must be at least 8 characters long</string>
     <string name="error_owner">Owner name must be at least 8 characters long</string>
     <string name="error_new_buyer">new Buyer name must be at least 8 characters long</string>
-    <string name="button_cancel">Cancel</string>
+
     <string name="qr_code_content">A QR Code Image</string>
     <string name="query_hello">Hello</string>
     <string name="query_accounts">Accounts</string>
