@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/loginPageBackgroundColor"
-    tools:context=".CreateUserFragment">
+    tools:context=".CreateProductFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,66 +22,21 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="18dp"
             android:gravity="center_vertical"
-            android:text="@string/text_create_user"
+            android:text="@string/text_add_product"
             android:textAlignment="center"
             android:textColor="@color/colorPrimaryDark"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="30sp" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inputUsernameLayout"
+            android:id="@+id/inputLayoutProductName"
             style="@style/Widget.Provenance.TextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_username">
+            android:hint="@string/hint_product_name">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputUsernameText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimaryDark"
-                android:inputType="text"
-                android:maxLines="1" />
-        </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inputRoleLayout"
-            style="@style/Widget.Provenance.TextInputLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/hint_role">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputRoleText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimaryDark"
-                android:inputType="text"
-                android:maxLines="1" />
-        </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inputLocationLayout"
-            style="@style/Widget.Provenance.TextInputLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/hint_location">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputLocationText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimaryDark"
-                android:inputType="text"
-                android:maxLines="1" />
-        </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inputAccountAddressLayout"
-            style="@style/Widget.Provenance.TextInputLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/hint_account_address">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputAccountAddressText"
+                android:id="@+id/inputTextProductName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorPrimaryDark"
@@ -89,11 +44,47 @@
                 android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/createUserButton"
+            android:id="@+id/buttonQRCodeScanSellerAccount"
+            style="@style/Widget.Provenance.Button.Menu"
+            android:layout_marginTop="26dp"
+            android:layout_marginBottom="6dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_scan_seller_account" />
+
+        <TextView
+            android:id="@+id/textViewOrEnterBelow3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:gravity="center_horizontal"
+            android:text="@string/text_view_suggestion_enter_account"
+            android:textAppearance="@style/TextAppearance.Provenance.Title"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputLayoutSellerAccountAddress"
+            style="@style/Widget.Provenance.TextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_seller_account_address">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputTextSellerAccountAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
+                android:inputType="text"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonAddProduct"
             style="@style/Widget.Provenance.Button.Menu"
             android:layout_marginTop="26dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/button_create_user" />
+            android:text="@string/button_add_product" />
     </LinearLayout>
 </ScrollView>

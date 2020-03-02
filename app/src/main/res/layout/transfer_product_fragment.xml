@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/loginPageBackgroundColor"
+    tools:context=".TransferProductFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:padding="15dp" >
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonQRCodeScanProduct"
+            style="@style/Widget.Provenance.Button.Menu"
+            android:layout_marginTop="26dp"
+            android:layout_marginBottom="6dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_scan_product" />
+
+        <TextView
+            android:id="@+id/textViewOrEnterBelow1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:gravity="center_horizontal"
+            android:text="@string/text_view_suggestion_enter_account"
+            android:textAppearance="@style/TextAppearance.Provenance.Title"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Provenance.TextInputLayout"
+            android:id="@+id/inputLayoutProductAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="18dp"
+            android:hint="@string/hint_product_address">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputTextProductAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textColor="@color/colorPrimaryDark" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonQRCodeScanTransferAccount"
+            style="@style/Widget.Provenance.Button.Menu"
+            android:layout_marginTop="26dp"
+            android:layout_marginBottom="6dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_scan_transfer_account" />
+
+        <TextView
+            android:id="@+id/textViewOrEnterBelow2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:gravity="center_horizontal"
+            android:text="@string/text_view_suggestion_enter_account"
+            android:textAppearance="@style/TextAppearance.Provenance.Title"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Provenance.TextInputLayout"
+            android:id="@+id/inputLayoutTransferAccountAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="18dp"
+            android:hint="@string/hint_transfer_account_address">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputTextTransferAccountAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textColor="@color/colorPrimaryDark" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonTransferProduct"
+            style="@style/Widget.Provenance.Button.Menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_transfer_product_approve" />
+
+    </LinearLayout>
+</ScrollView>

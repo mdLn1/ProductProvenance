@@ -35,6 +35,7 @@ public class MainFragment extends Fragment implements View.OnClickListener{
             buttonTransferProductMainMenu,
             buttonShowAccountQRMainMenu;
     private SharedPreferences sharedPref;
+    private View view;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,7 +47,7 @@ public class MainFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment with the ProductGrid theme
-        View view = inflater.inflate(R.layout.main_fragment, container, false);
+        view = inflater.inflate(R.layout.main_fragment, container, false);
         sharedPref = this.getActivity().getSharedPreferences(Constants.userDataStore, Context.MODE_PRIVATE);
 
         // Set up the tool bar
@@ -108,6 +109,8 @@ public class MainFragment extends Fragment implements View.OnClickListener{
                 }
             }
         } else {
+            Toolbar toolbar = view.findViewById(R.id.app_bar);
+            toolbar.setTitle(R.string.app_name);
             menuItemLogin.setVisibility(View.VISIBLE);
             menuItemLogout.setVisibility(View.GONE);
             buttonShowAccountQRMainMenu.setVisibility(View.GONE);

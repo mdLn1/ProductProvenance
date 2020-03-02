@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Product Provenance</string>
     <string name="text_create_user">Create User</string>
+    <string name="text_add_product">Add Product</string>
 
     <string name="backdrop_menu_products">My Products</string>
     <string name="backdrop_menu_commercial">Commercial</string>
@@ -23,6 +24,10 @@
     <string name="hint_location">Main Location</string>
     <string name="hint_role">Role</string>
     <string name="hint_account_address">Account Address</string>
+    <string name="hint_seller_account_address">Seller Account Address</string>
+    <string name="hint_transfer_account_address">Transfer to account</string>
+    <string name="hint_product_address">Product code</string>
+    <string name="hint_product_name">Product name</string>
 
     <string name="button_create_user_main_menu">Create User</string>
     <string name="button_add_product_main_menu">Add Product</string>
@@ -31,6 +36,7 @@
     <string name="button_qrcode_scan_main_menu">Scan QR Code</string>
 
     <string name="button_login">Login</string>
+    <string name="button_add_product">Add Product</string>
     <string name="button_logout">Logout</string>
     <string name="button_next_main_menu">Next</string>
     <string name="button_qrcode_scan">Scan QR Code</string>
@@ -40,11 +46,17 @@
     <string name="button_resell">Change Owner</string>
     <string name="button_create_user">Submit</string>
     <string name="button_cancel">Cancel</string>
+    <string name="button_transfer_product_approve">Approve transfer</string>
+    <string name="button_scan_transfer_account">Scan transfer account</string>
+    <string name="button_scan_product">Scan product tag</string>
+    <string name="button_scan_seller_account">Scan seller code</string>
 
     <string name="error_password">Password must contain at least 8 characters.</string>
     <string name="error_buyer">Buyer name must be at least 8 characters long</string>
     <string name="error_owner">Owner name must be at least 8 characters long</string>
     <string name="error_new_buyer">new Buyer name must be at least 8 characters long</string>
+
+    <string name="text_view_suggestion_enter_account">or enter below</string>
 
     <string name="qr_code_content">A QR Code Image</string>
     <string name="query_hello">Hello</string>

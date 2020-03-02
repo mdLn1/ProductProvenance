@@ -6,21 +6,20 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-
 public class MainActivity extends AppCompatActivity implements NavigationHost, View.OnClickListener {
 
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
     private static final String MainFragmentTAG = "MainFragment";
-    private static final String LoginFragmentTag = "LoginFragment";
+    private static final String LoginFragmentTAG = "LoginFragment";
+    private static final String TransferProductFragmentTAG = "TransferProductFragment";
+    private static final String CreateProductFragmentTAG = "CreateProductFragmentTAG";
     private SharedPreferences sharedPref;
 
     @Override
@@ -29,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements NavigationHost, V
         setContentView(R.layout.activity_main);
         sharedPref = getSharedPreferences(Constants.userDataStore, Context.MODE_PRIVATE);
 
-        fragmentManager=getSupportFragmentManager();
+        fragmentManager = getSupportFragmentManager();
 
         if (savedInstanceState == null) {
             fragmentManager
@@ -39,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements NavigationHost, V
                     .commit();
         }
     }
+
     public void onTabSelected(int position) {
         // Pop off everything up to and including the current tab
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -66,19 +66,19 @@ public class MainActivity extends AppCompatActivity implements NavigationHost, V
 
     @Override
     public void navigateTo(Fragment fragment, boolean addToBackstack) {
-        if(fragment instanceof MainFragment) {
-                Fragment fragment1 = fragmentManager.findFragmentByTag(MainFragmentTAG);
-                if(fragment1 != null) {
-                    fragmentManager.popBackStack(MainFragmentTAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                }
+        if (fragment instanceof MainFragment) {
+            Fragment fragment1 = fragmentManager.findFragmentByTag(MainFragmentTAG);
+            if (fragment1 != null) {
+                fragmentManager.popBackStack(MainFragmentTAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            }
         }
-            fragmentTransaction =
-                    fragmentManager
-                            .beginTransaction()
-                            .replace(R.id.mainContainer, fragment);
+        fragmentTransaction =
+                fragmentManager
+                        .beginTransaction()
+                        .replace(R.id.mainContainer, fragment);
 
 
-            fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.addToBackStack(null);
 
         fragmentTransaction.commit();
     }
@@ -90,9 +90,9 @@ public class MainActivity extends AppCompatActivity implements NavigationHost, V
 
     @Override
     public void onBackPressed() {
-        if(fragmentManager.getBackStackEntryCount() > 1){
+        if (fragmentManager.getBackStackEntryCount() > 1) {
             fragmentManager.popBackStack();
-        }else{
+        } else {
             fragmentManager.popBackStack();
             super.onBackPressed();
         }
@@ -102,23 +102,51 @@ public class MainActivity extends AppCompatActivity implements NavigationHost, V
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == RESULT_OK){
-            if (requestCode == Constants.QR_SCAN_ACTION) {
+        if (resultCode == RESULT_OK) {
+            if (requestCode > 1100 && requestCode < 1200) {
                 String qrData = data.getStringExtra(Constants.GET_SCANNED_QR_DATA);
-                ProductDetailsFragment productDetailsFragment = new ProductDetailsFragment();
-                Bundle fragmentData = new Bundle();
-                fragmentData.putString(Constants.GET_SCANNED_QR_DATA, qrData);
-                productDetailsFragment.setArguments(fragmentData);//F
-                navigateTo(productDetailsFragment, true);
+                switch (requestCode) {
+                    case Constants.QR_SCAN_ACTION:
+                        ProductDetailsFragment productDetailsFragment = new ProductDetailsFragment();
+                        Bundle fragmentData = new Bundle();
+                        fragmentData.putString(Constants.GET_SCANNED_QR_DATA, qrData);
+                        productDetailsFragment.setArguments(fragmentData);//F
+                        navigateTo(productDetailsFragment, true);
+                        break;
+                    case Constants.QR_SCAN_SET_PRODUCT_SELLER:
+                        CreateProductFragment fragment2 =
+                                (CreateProductFragment) getSupportFragmentManager().findFragmentByTag(CreateProductFragmentTAG);
+                        if (fragment2 != null) {
+                            fragment2.updateSellerAccountAddres(qrData);
+                        }
+                        break;
+                    case Constants.QR_SCAN_TRANSFER_TO_ACCOUNT:
+                        TransferProductFragment fragment =
+                                (TransferProductFragment) getSupportFragmentManager().findFragmentByTag(TransferProductFragmentTAG);
+                        if (fragment != null) {
+                            fragment.updateTransferAccountText(qrData);
+                        }
+                        break;
+                    case Constants.QR_SCAN_TRANSFER_PRODUCT:
+                        TransferProductFragment fragment1 =
+                                (TransferProductFragment) getSupportFragmentManager().findFragmentByTag(TransferProductFragmentTAG);
+                        if (fragment1 != null) {
+                            fragment1.updateTransferProductText(qrData);
+                        }
+                        break;
+                    default:
+                        // 2
+                        break;
+                }
             } else if (requestCode == Constants.SKIP_LOGIN_ACTION) {
                 String chosenAccount = data.getStringExtra(Constants.GET_SELECTED_ACCOUNT_DATA);
-                if(Constants.accounts.containsKey(chosenAccount)) {
+                if (Constants.accounts.containsKey(chosenAccount)) {
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.putString(Constants.accountAddress, Constants.accounts.get(chosenAccount));
                     editor.putString(Constants.accountName, chosenAccount);
                     editor.commit();
-                    MainFragment fragment = (MainFragment)getSupportFragmentManager().findFragmentByTag(MainFragmentTAG);
-                    if(fragment != null){
+                    MainFragment fragment = (MainFragment) getSupportFragmentManager().findFragmentByTag(MainFragmentTAG);
+                    if (fragment != null) {
                         fragment.checkLoginStatus();
                     }
                 } else {
@@ -127,7 +155,7 @@ public class MainActivity extends AppCompatActivity implements NavigationHost, V
                 }
 
             }
-        } else if(resultCode == RESULT_CANCELED) {
+        } else if (resultCode == RESULT_CANCELED) {
             if (requestCode == Constants.QR_SCAN_ACTION) {
                 Toast.makeText(this, "You need to scan a QR code to find the product details", Toast.LENGTH_LONG).show();
             }
@@ -138,11 +166,42 @@ public class MainActivity extends AppCompatActivity implements NavigationHost, V
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.buttonCreateUserMainMenu:
+                navigateTo(new CreateUserFragment(), false);
+                break;
+            case R.id.buttonShowAccountQRMainMenu:
+                startActivity(new Intent(this, QRCodeGeneratorActivity.class));
+                break;
+            case R.id.buttonAddProductMainMenu:
+                fragmentManager
+                        .beginTransaction()
+                        .add(R.id.mainContainer, new CreateProductFragment(), CreateProductFragmentTAG)
+                        .addToBackStack(CreateProductFragmentTAG)
+                        .commit();
+                break;
+            case R.id.buttonAddProduct:
+                break;
             case R.id.skipButton:
                 startActivityForResult(new Intent(this, AccountsActivity.class), Constants.SKIP_LOGIN_ACTION);
                 break;
             case R.id.menuItemProducts:
                 Toast.makeText(this, "My Products", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.buttonTransferProductMainMenu:
+                fragmentManager
+                        .beginTransaction()
+                        .add(R.id.mainContainer, new TransferProductFragment(), TransferProductFragmentTAG)
+                        .addToBackStack(TransferProductFragmentTAG)
+                        .commit();
+                break;
+            case R.id.buttonQRCodeScanProduct:
+                startActivityForResult(new Intent(this, SimpleTestActivity.class), Constants.QR_SCAN_TRANSFER_PRODUCT);
+                break;
+            case R.id.buttonQRCodeScanTransferAccount:
+                startActivityForResult(new Intent(this, SimpleTestActivity.class), Constants.QR_SCAN_TRANSFER_TO_ACCOUNT);
+                break;
+            case R.id.buttonQRCodeScanSellerAccount:
+                startActivityForResult(new Intent(this, SimpleTestActivity.class), Constants.QR_SCAN_SET_PRODUCT_SELLER);
                 break;
             case R.id.buttonLogout:
 //                new MaterialAlertDialogBuilder(this)
@@ -156,7 +215,7 @@ public class MainActivity extends AppCompatActivity implements NavigationHost, V
 //                        })
 //                        .setNeutralButton("Scan Again", null)
 //                        .show();
-                navigateTo(new CreateUserFragment(),true);
+                navigateTo(new CreateUserFragment(), true);
                 break;
             case R.id.menuItemCommercial:
                 startActivity(new Intent(this, CommercialActivity.class));
