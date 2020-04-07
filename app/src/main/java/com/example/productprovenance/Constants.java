@@ -9,6 +9,15 @@ public final class Constants {
 
     public static Map<String, String> accounts = new HashMap<String, String>();
 
+    // NFC responses
+    public static final int NFC_ENABLED = 0;
+    public static final int NFC_DISABLED = 1;
+    public static final int NFC_NOT_SUPPORTED = 2;
+
+    // permissions request code
+    public static final int REQUEST_LOCATION_PERMISSION = 300;
+    public static final int REQUEST_INTERNET_PERMISSION = 302;
+
     // INTENT RETURN CODES
     public static final int PICK_ACCOUNT_REQUEST = 1001;
     public static final int SELECT_ACCOUNT_REQUEST = 1002;
@@ -57,18 +66,27 @@ public final class Constants {
 
 
 
-    // POPULATING ACCOUNTS HASHMAP WITH VALUES
+    // POPULATING ACCOUNTS HASHMAP WITH VALUES LINUX MINT
+//    static {
+//        accounts.put("MANUFACTURER1", "0x0B4f77e363D616619EC62b6c170ec89dA009D3C1");
+//        accounts.put("MANUFACTURER2", "0xfD2508300712d411A3A8a0A9ef977A125660862e");
+//        accounts.put("SELLER1", "0xC84c54141C5bbB2beBDBEe60A72c382EdA4Ac946");
+//        accounts.put("SELLER2", "0x91d99C048e487da7060F8362Fa1196236fd2b115");
+//        accounts.put("DISTRIBUTOR1", "0x41aC78c7De22908a06173F1046bE05C85477f6d3");
+//        accounts.put("DISTRIBUTOR2", "0x334805D9FC31F4325C8376b9C731B386A3fF0455");
+//        accounts.put("ADMIN", "0x2Cd755E0836C99eDea2E7543B608b0440dF4746F");
+//    }
+
+    // POPULATING ACCOUNTS HASHMAP WITH VALUES WINDOWS 10
     static {
-        accounts.put("MANUFACTURER1", "0x0B4f77e363D616619EC62b6c170ec89dA009D3C1");
-        accounts.put("MANUFACTURER2", "0xfD2508300712d411A3A8a0A9ef977A125660862e");
-        accounts.put("SELLER1", "0xC84c54141C5bbB2beBDBEe60A72c382EdA4Ac946");
-        accounts.put("SELLER2", "0x91d99C048e487da7060F8362Fa1196236fd2b115");
-        accounts.put("DISTRIBUTOR1", "0x41aC78c7De22908a06173F1046bE05C85477f6d3");
-        accounts.put("DISTRIBUTOR2", "0x334805D9FC31F4325C8376b9C731B386A3fF0455");
-        accounts.put("ADMIN", "0x2Cd755E0836C99eDea2E7543B608b0440dF4746F");
+        accounts.put("MANUFACTURER1", "0x95bEc0f0067DBdd06Ad791440B77f80F7943D66d");
+        accounts.put("MANUFACTURER2", "0x95bEc0f0067DBdd06Ad791440B77f80F7943D66d");
+        accounts.put("SELLER1", "0xbD5Fbf4724C5607C397968bf065BC93536aB7726");
+        accounts.put("SELLER2", "0xe3BE60D77C3f0fa27a9b82c48eC8b9fA75285d99");
+        accounts.put("DISTRIBUTOR1", "0xB3DC0e9F140C06e4188F0c3096B3Df54AA7f6f5D");
+        accounts.put("DISTRIBUTOR2", "0x4Da0ec157f15D7072C17962A6E2371A014E6f557");
+        accounts.put("ADMIN", "0x0e92cb2a4B41990e290Ac79a883587B40eBbF0dC");
     }
-
-
 
 
 }

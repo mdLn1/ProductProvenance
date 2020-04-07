@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +16,7 @@ import java.util.List;
 public class AccountsActivity extends AppCompatActivity {
 
     private ListView accountsListView;
-    private List accountsList = new ArrayList<String>();
+    private List<String> accountsList = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +30,7 @@ public class AccountsActivity extends AppCompatActivity {
         accountsList.add("SELLER2");
         accountsList.add("DISTRIBUTOR1");
         accountsList.add("DISTRIBUTOR2");
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, accountsList);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, accountsList);
         accountsListView.setAdapter(arrayAdapter);
 
         accountsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

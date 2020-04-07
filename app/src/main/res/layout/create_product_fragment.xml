@@ -26,7 +26,8 @@
             android:textAlignment="center"
             android:textColor="@color/colorPrimaryDark"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            tools:ignore="RtlCompat" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/inputLayoutProductName"
@@ -80,7 +81,7 @@
                 android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/buttonAddProduct"
+            android:id="@+id/buttonCreateProduct"
             style="@style/Widget.Provenance.Button.Menu"
             android:layout_marginTop="26dp"
             android:layout_width="match_parent"

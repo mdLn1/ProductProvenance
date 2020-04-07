@@ -10,7 +10,7 @@ android:paddingTop="@dimen/activity_vertical_margin"
 tools:context=".QRCodeGeneratorActivity" >
 
 <ImageView
-    android:id="@+id/qrCodeImageView"
+    android:id="@+id/qrCodeProductImageView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:contentDescription="@string/qr_code_content"

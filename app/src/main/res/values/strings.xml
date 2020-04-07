@@ -2,6 +2,8 @@
     <string name="app_name">Product Provenance</string>
     <string name="text_create_user">Create User</string>
     <string name="text_add_product">Add Product</string>
+    <string name="text_product_created">Product created!</string>
+    <string name="text_new_product_name">New product name: </string>
 
     <string name="backdrop_menu_products">My Products</string>
     <string name="backdrop_menu_commercial">Commercial</string>
@@ -50,6 +52,8 @@
     <string name="button_scan_transfer_account">Scan transfer account</string>
     <string name="button_scan_product">Scan product tag</string>
     <string name="button_scan_seller_account">Scan seller code</string>
+    <string name="button_write_nfc_tag">write NFC tag</string>
+    <string name="button_view_product_qr_code">View QR code</string>
 
     <string name="error_password">Password must contain at least 8 characters.</string>
     <string name="error_buyer">Buyer name must be at least 8 characters long</string>

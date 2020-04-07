@@ -1,18 +1,38 @@
 package com.example.productprovenance;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.Manifest;
+import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.nfc.NdefMessage;
+import android.nfc.NfcAdapter;
+import android.nfc.Tag;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements NavigationHost, View.OnClickListener {
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.snackbar.Snackbar;
+
+public class MainActivity extends AppCompatActivity implements NavigationHost, View.OnClickListener, ActivityCompat.OnRequestPermissionsResultCallback {
 
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
@@ -20,7 +40,17 @@ public class MainActivity extends AppCompatActivity implements NavigationHost, V
     private static final String LoginFragmentTAG = "LoginFragment";
     private static final String TransferProductFragmentTAG = "TransferProductFragment";
     private static final String CreateProductFragmentTAG = "CreateProductFragmentTAG";
+    private static final String ViewQRWriteNFCProductFragmentTAG = "ViewQRWriteNFCProductFragmentTAG";
     private SharedPreferences sharedPref;
+    private FusedLocationProviderClient fusedLocationClient;
+    private Location currentLocation;
+
+
+    private NFCWriter nfcWriter;
+    private View view;
+    private NdefMessage message = null;
+    private ProgressDialog dialog;
+    Tag currentTag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +58,10 @@ public class MainActivity extends AppCompatActivity implements NavigationHost, V
         setContentView(R.layout.activity_main);
         sharedPref = getSharedPreferences(Constants.userDataStore, Context.MODE_PRIVATE);
 
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
         fragmentManager = getSupportFragmentManager();
+        nfcWriter = new NFCWriter(this);
 
         if (savedInstanceState == null) {
             fragmentManager
@@ -36,6 +69,100 @@ public class MainActivity extends AppCompatActivity implements NavigationHost, V
                     .add(R.id.mainContainer, new MainFragment(), MainFragmentTAG)
                     .addToBackStack(MainFragmentTAG)
                     .commit();
+        }
+        if (checkSelfPermission(Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED) {
+            if (shouldShowRequestPermissionRationale(Manifest.permission.INTERNET)) {
+                Toast.makeText(this,
+                        "Internet permission is required so the app can work", Toast.LENGTH_LONG).show();
+                requestPermissions(new String[]{Manifest.permission.INTERNET}, Constants.REQUEST_INTERNET_PERMISSION);
+            }
+        }
+        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)) {
+                Toast.makeText(this,
+                        "Location permission is required to perform some of the functionality", Toast.LENGTH_LONG).show();
+                requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, Constants.REQUEST_LOCATION_PERMISSION);
+            }
+        }
+        view = findViewById(R.id.mainContainer);
+    }
+
+    public void checkLocationPermission() {
+        getLocation();
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            Toast.makeText(getApplicationContext(), "permissions should be reviewed for android 10 and above", Toast.LENGTH_LONG).show();
+        } else {
+            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                while (currentLocation == null) {
+                    getLocation();
+                }
+                new MaterialAlertDialogBuilder(getApplicationContext())
+                        .setTitle("Successfully received location")
+                        .setMessage("Latitude: " + currentLocation.getLatitude() + " Longitude: " + currentLocation.getLongitude())
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Log.d("okish", "no biggie");
+                            }
+                        })
+                        .show();
+            } else {
+                if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)) {
+                    Snackbar snackbar = Snackbar
+                            .make(findViewById(R.id.mainContainer),
+                                    "Location permission is needed so we can check your authorization", Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                    requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, Constants.REQUEST_LOCATION_PERMISSION);
+                }
+            }
+        }
+
+    }
+
+    public void checkInternetPermission() {
+        if (checkSelfPermission(Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED) {
+            if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)) {
+                Snackbar snackbar = Snackbar
+                        .make(findViewById(R.id.mainContainer),
+                                "Internet access is needed for the app to perform", Snackbar.LENGTH_LONG);
+                snackbar.show();
+                requestPermissions(new String[]{Manifest.permission.INTERNET}, Constants.REQUEST_INTERNET_PERMISSION);
+            }
+        }
+    }
+
+    public void getLocation() {
+        fusedLocationClient.getLastLocation()
+                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        if (location != null) {
+                            currentLocation = location;
+                        } else {
+                            currentLocation = null;
+                        }
+                    }
+                });
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        if (requestCode == Constants.REQUEST_LOCATION_PERMISSION) {
+            if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Snackbar snackbar = Snackbar
+                        .make(findViewById(R.id.mainContainer),
+                                "Location access granted", Snackbar.LENGTH_LONG);
+                snackbar.show();
+            }
+        } else if (requestCode == Constants.REQUEST_INTERNET_PERMISSION) {
+            if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Snackbar snackbar = Snackbar
+                        .make(findViewById(R.id.mainContainer),
+                                "Internet access granted", Snackbar.LENGTH_LONG);
+                snackbar.show();
+            }
         }
     }
 
@@ -117,7 +244,7 @@ public class MainActivity extends AppCompatActivity implements NavigationHost, V
                         CreateProductFragment fragment2 =
                                 (CreateProductFragment) getSupportFragmentManager().findFragmentByTag(CreateProductFragmentTAG);
                         if (fragment2 != null) {
-                            fragment2.updateSellerAccountAddres(qrData);
+                            fragment2.updateSellerAccountAddress(qrData);
                         }
                         break;
                     case Constants.QR_SCAN_TRANSFER_TO_ACCOUNT:
@@ -162,6 +289,55 @@ public class MainActivity extends AppCompatActivity implements NavigationHost, V
         }
 
     }
+    //region android nfc writer code start
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+            int result = nfcWriter.checkNFCWorking();
+            if(result == Constants.NFC_ENABLED)
+{
+    //nfcMger.enableDispatch();
+            Intent nfcIntent = new Intent(this, getClass());
+            nfcIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, nfcIntent, 0);
+            IntentFilter[] intentFiltersArray = new IntentFilter[] {};
+            String[][] techList = new String[][] { { android.nfc.tech.Ndef.class.getName() }, { android.nfc.tech.NdefFormatable.class.getName() } };
+            NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(this);
+            nfcAdapter.enableForegroundDispatch(this, pendingIntent, intentFiltersArray, techList);
+        }
+        else if(result == Constants.NFC_NOT_SUPPORTED) {
+            Snackbar.make(view, "NFC not supported", Snackbar.LENGTH_LONG).show();
+        }
+        else {
+            Snackbar.make(view, "NFC Not enabled", Snackbar.LENGTH_LONG).show();
+        }
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        nfcWriter.disableDispatch();
+    }
+
+    @Override
+    public void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        Log.d("Nfc", "New intent");
+        // It is the time to write the tag
+        currentTag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
+        if (message != null) {
+            nfcWriter.writeTag(currentTag, message);
+            dialog.dismiss();
+            Snackbar.make(view, "Tag written", Snackbar.LENGTH_LONG).show();
+
+        } else {
+            // Handle intent
+
+        }
+    }
+    //endregion
 
     @Override
     public void onClick(View v) {
@@ -172,6 +348,16 @@ public class MainActivity extends AppCompatActivity implements NavigationHost, V
             case R.id.buttonShowAccountQRMainMenu:
                 startActivity(new Intent(this, QRCodeGeneratorActivity.class));
                 break;
+            case R.id.writeNfcTagButton:
+                Log.i("Writing_NFC", "written");
+                String productName1 = "get product name";
+                message =  nfcWriter.createTextMessage(productName1);
+                if (message != null) {
+                    dialog = new ProgressDialog(MainActivity.this);
+                    dialog.setMessage("Tag NFC Tag please");
+                    dialog.show();;
+                }
+                break;
             case R.id.buttonAddProductMainMenu:
                 fragmentManager
                         .beginTransaction()
@@ -179,7 +365,17 @@ public class MainActivity extends AppCompatActivity implements NavigationHost, V
                         .addToBackStack(CreateProductFragmentTAG)
                         .commit();
                 break;
-            case R.id.buttonAddProduct:
+            case R.id.buttonCreateProduct:
+                // after creating product with API request
+                String productName = "get product name";
+                String productId = "get product id";
+
+                QRNFCProductFragment qrnfcProductFragment = QRNFCProductFragment.newInstance(productName, productId);
+                fragmentManager
+                        .beginTransaction()
+                        .add(R.id.mainContainer, qrnfcProductFragment, ViewQRWriteNFCProductFragmentTAG)
+                        .addToBackStack(ViewQRWriteNFCProductFragmentTAG)
+                        .commit();
                 break;
             case R.id.skipButton:
                 startActivityForResult(new Intent(this, AccountsActivity.class), Constants.SKIP_LOGIN_ACTION);
@@ -215,7 +411,7 @@ public class MainActivity extends AppCompatActivity implements NavigationHost, V
 //                        })
 //                        .setNeutralButton("Scan Again", null)
 //                        .show();
-                navigateTo(new CreateUserFragment(), true);
+                navigateTo(new MainFragment(), true);
                 break;
             case R.id.menuItemCommercial:
                 startActivity(new Intent(this, CommercialActivity.class));

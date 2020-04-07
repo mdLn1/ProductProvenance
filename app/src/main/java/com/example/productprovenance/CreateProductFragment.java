@@ -20,7 +20,7 @@ public class CreateProductFragment extends Fragment implements View.OnClickListe
         View view = inflater.inflate(R.layout.create_product_fragment, container, false);
         inputTextSellerAccountAddress = view.findViewById(R.id.inputTextSellerAccountAddress);
 
-        Button buttonAddProduct = view.findViewById(R.id.buttonAddProduct);
+        Button buttonAddProduct = view.findViewById(R.id.buttonCreateProduct);
         Button buttonQRCodeScanSellerAccount = view.findViewById(R.id.buttonQRCodeScanSellerAccount);
         buttonAddProduct.setOnClickListener(this);
         buttonQRCodeScanSellerAccount.setOnClickListener(this);
@@ -28,7 +28,7 @@ public class CreateProductFragment extends Fragment implements View.OnClickListe
         return view;
     }
 
-    public void updateSellerAccountAddres(String text) {
+    public void updateSellerAccountAddress(String text) {
         inputTextSellerAccountAddress.setText(text);
         inputTextSellerAccountAddress.clearFocus();
     }
