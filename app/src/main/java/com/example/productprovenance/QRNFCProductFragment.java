@@ -54,6 +54,14 @@ public class QRNFCProductFragment extends Fragment implements View.OnClickListen
         return view;
     }
 
+    public String getProductName() {
+        return productName;
+    }
+
+    public String getProductId(){
+        return productId;
+    }
+
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.viewQRCodeButton) {

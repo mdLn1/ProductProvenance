@@ -62,7 +62,7 @@ public class CommercialActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.buttonQRCodeScan:
-                startActivityForResult(new Intent(this, SimpleTestActivity.class),Constants.QR_SCAN_ACTION);
+                startActivityForResult(new Intent(this, QRScanActivity.class),Constants.QR_SCAN_ACTION);
                 break;
             case R.id.buttonNFCTagScan:
                 startActivityForResult(new Intent(this, NFCScanActivity.class), Constants.NFC_SCAN_ACTION);

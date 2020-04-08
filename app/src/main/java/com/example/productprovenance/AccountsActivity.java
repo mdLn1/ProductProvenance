@@ -30,7 +30,7 @@ public class AccountsActivity extends AppCompatActivity {
         accountsList.add("SELLER2");
         accountsList.add("DISTRIBUTOR1");
         accountsList.add("DISTRIBUTOR2");
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, accountsList);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_activated_1, accountsList);
         accountsListView.setAdapter(arrayAdapter);
 
         accountsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

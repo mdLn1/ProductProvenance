@@ -53,13 +53,11 @@ public class QRScanActivity extends AppCompatActivity implements ZXingScannerVie
         ActivityCompat.requestPermissions(this, new String[]{CAMERA}, REQUEST_CAMERA);
     }
 
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         switch (requestCode) {
             case REQUEST_CAMERA:
                 if (grantResults.length > 0) {
-
-                    boolean cameraAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-                    if (cameraAccepted) {
+                    if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                         Toast.makeText(getApplicationContext(), "Permission Granted, Now you can access camera", Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(getApplicationContext(), "Permission Denied, You cannot access and camera", Toast.LENGTH_LONG).show();
@@ -97,8 +95,8 @@ public class QRScanActivity extends AppCompatActivity implements ZXingScannerVie
     public void onResume() {
         super.onResume();
 
-        int currentapiVersion = android.os.Build.VERSION.SDK_INT;
-        if (currentapiVersion >= android.os.Build.VERSION_CODES.M) {
+        int currentApiVersion = android.os.Build.VERSION.SDK_INT;
+        if (currentApiVersion >= android.os.Build.VERSION_CODES.M) {
             if (checkPermission()) {
                 if (mScannerView == null) {
                     mScannerView = new ZXingScannerView(this);
