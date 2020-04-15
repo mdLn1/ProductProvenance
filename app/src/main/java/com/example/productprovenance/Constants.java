@@ -14,6 +14,12 @@ public final class Constants {
     public static final int NFC_DISABLED = 1;
     public static final int NFC_NOT_SUPPORTED = 2;
 
+    // max/min latitude and longitude
+    public static final int LATITUDE_MAX = 90;
+    public static final int LATITUDE_MIN = -90;
+    public static final int LONGITUDE_MIN = -180;
+    public static final int LONGITUDE_MAX = 180;
+
     // permissions request code
     public static final int REQUEST_LOCATION_PERMISSION = 300;
     public static final int REQUEST_INTERNET_PERMISSION = 302;
