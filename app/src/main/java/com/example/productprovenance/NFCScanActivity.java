@@ -1,6 +1,5 @@
 package com.example.productprovenance;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.PendingIntent;
@@ -19,8 +18,8 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.productprovenance.record.NdefMessageParser;
-import com.example.productprovenance.record.ParsedNdefRecord;
+import com.example.productprovenance.nfc_functions.NdefMessageParser;
+import com.example.productprovenance.nfc_functions.ParsedNdefRecord;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 
@@ -109,9 +108,9 @@ public class NFCScanActivity extends AppCompatActivity {
                 .setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent( );
+                        Intent intent = getIntent();
                         intent.putExtra(Constants.GET_SCANNED_NFC_DATA, resultNFCScan);
-                        setResult(RESULT_OK);
+                        setResult(RESULT_OK, intent);
                         finish();
                     }
                 })

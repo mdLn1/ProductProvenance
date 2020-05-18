@@ -23,6 +23,7 @@ public final class Constants {
     // permissions request code
     public static final int REQUEST_LOCATION_PERMISSION = 300;
     public static final int REQUEST_INTERNET_PERMISSION = 302;
+    public static final int REQUEST_CAMERA_PERMISSION = 303;
 
     // INTENT RETURN CODES
     public static final int PICK_ACCOUNT_REQUEST = 1001;
@@ -32,6 +33,9 @@ public final class Constants {
     public static final int QR_SCAN_TRANSFER_PRODUCT = 1102;
     public static final int QR_SCAN_TRANSFER_TO_ACCOUNT = 1103;
     public static final int QR_SCAN_SET_PRODUCT_SELLER = 1104;
+    public static final int QR_SEARCH_PRODUCT_ACTION = 1105;
+    public static final int QR_FIND_HOLDER_ACTION = 1106;
+    public static final int QR_FIND_SELLER_ACTION = 1107;
 
     public static final int NFC_SCAN_ACTION = 1201;
 
@@ -46,17 +50,26 @@ public final class Constants {
     public static final String userDataStore = "userDetails";
     public static final String accountAddress = "accountAddress";
     public static final String accountName= "accountName";
+    public static final String userToken = "userToken";
+    public static final String userRole = "userRole";
+    public static final String userDisabled = "userDisabled";
 
     // WEB API REQUESTS
-    public static final String ROUTE_DEFAULT = "http://192.168.0.10:5000/";
+//    public static final String ROUTE_DEFAULT = "http://192.168.0.10:5000/"; // local machine
+    public static final String ROUTE_DEFAULT = "http://mdlnblockchain.westeurope.cloudapp.azure.com:5000/"; // Azure VM
 
+    public static final String GET_TEST = ROUTE_DEFAULT + "hello";
+    public static final String POST_TEST = ROUTE_DEFAULT + "hello";
     public static final String GET_ACCOUNTS = ROUTE_DEFAULT + "accounts";
     public static final String GET_PRODUCT_DETAILS = ROUTE_DEFAULT + "product-details";
     public static final String GET_ALL_PRODUCTS = ROUTE_DEFAULT + "all-products";
     public static final String GET_PRODUCT_STATE = ROUTE_DEFAULT + "product-state";
-    public static final String GET_CONTRACT_OWNER = ROUTE_DEFAULT + "contract-owner";
+    public static final String GET_CONTRACT_OWNER = ROUTE_DEFAULT + "product-holder/?product=";
+    public static final String GET_CONTRACT_PRODUCT_SELLER = ROUTE_DEFAULT + "product-seller/?product=";
+    public static final String GET_COMPANY_BRANCHES = ROUTE_DEFAULT + "branches";
 
     public static final String POST_CREATE_USER = ROUTE_DEFAULT + "add-user";
+    public static final String POST_LOGIN_USER = ROUTE_DEFAULT + "login";
     public static final String POST_CREATE_PRODUCT_CONTRACT = ROUTE_DEFAULT + "add-contract";
     public static final String POST_TRANSFER_PRODUCT = ROUTE_DEFAULT + "transfer-product";
     public static final String POST_RETURN_PRODUCT = ROUTE_DEFAULT + "return-product";
@@ -64,8 +77,27 @@ public final class Constants {
     public static final String POST_SELL_PRODUCT = ROUTE_DEFAULT + "sell-product";
     public static final String POST_EDIT_PRODUCT = ROUTE_DEFAULT + "edit-product";
 
-    public static final String TRACKER_CONTRACT = "0x3449BB31ad95585Fe455b0713d2286a3FEcf0a50";
-    public static final String PRODUCT_ON_CHAIN = "0x000000000000000000000000b78728350da4bf2cc308ab081eb8eea3a3be34d4";
+    // WEB API RESPONSES
+    public static final int GET_TEST_RESPONSE = 3000;
+    public static final int GET_ACCOUNTS_RESPONSE = 3001;
+    public static final int GET_PRODUCT_DETAILS_RESPONSE = 3002;
+    public static final int GET_ALL_PRODUCTS_RESPONSE = 3003;
+    public static final int GET_PRODUCT_STATE_RESPONSE = 3004;
+    public static final int GET_CONTRACT_OWNER_RESPONSE = 3005;
+    public static final int GET_COMPANY_BRANCHES_RESPONSE = 3006;
+    public static final int GET_CONTRACT_PRODUCT_SELLER_RESPONSE = 3007;
+
+    public static final int POST_CREATE_USER_RESPONSE = 3050;
+    public static final int POST_LOGIN_USER_RESPONSE = 3051;
+    public static final int POST_CREATE_PRODUCT_CONTRACT_RESPONSE = 3052;
+    public static final int POST_TRANSFER_PRODUCT_RESPONSE = 3053;
+    public static final int POST_RETURN_PRODUCT_RESPONSE = 3054;
+    public static final int POST_RESELL_PRODUCT_RESPONSE = 3055;
+    public static final int POST_SELL_PRODUCT_RESPONSE = 3056;
+    public static final int POST_EDIT_PRODUCT_RESPONSE = 3057;
+
+    public static final String TRACKER_CONTRACT = "0x881fD57bC5880bD61c8492101f899E88ee6E6057";
+//    public static final String PRODUCT_ON_CHAIN = "0x000000000000000000000000b78728350da4bf2cc308ab081eb8eea3a3be34d4";
 
     public static final int GET_REQUEST = Request.Method.GET;
     public static final int POST_REQUEST = Request.Method.POST;

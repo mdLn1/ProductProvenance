@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Product Provenance</string>
+    <string name="app_name">Provenance</string>
     <string name="text_create_user">Create User</string>
     <string name="text_add_product">Add Product</string>
     <string name="text_product_created">Product created!</string>
@@ -19,28 +19,32 @@
     <string name="tab_return">Return</string>
 
     <string name="hint_username">Username</string>
+    <string name="hint_node_address">Node address</string>
     <string name="hint_password">Password</string>
-    <string name="hint_buyer">Buyer Name</string>
-    <string name="hint_new_buyer">New Owner</string>
-    <string name="hint_owner">Current Owner</string>
+    <string name="hint_buyer">Buyer memorable code</string>
+    <string name="hint_new_buyer">New Owner memorable code</string>
+    <string name="hint_owner">Current Owner memorable code</string>
     <string name="hint_location">Main Location</string>
     <string name="hint_role">Role</string>
     <string name="hint_account_address">Account Address</string>
-    <string name="hint_seller_account_address">Seller Account Address</string>
+    <string name="hint_seller_account_address">Seller Account Name/Address</string>
     <string name="hint_transfer_account_address">Transfer to account</string>
     <string name="hint_product_address">Product code</string>
     <string name="hint_product_name">Product name</string>
+    <string name="hint_link_to_merch">Link to merch</string>
 
     <string name="button_create_user_main_menu">Create User</string>
     <string name="button_add_product_main_menu">Add Product</string>
     <string name="button_transfer_product_main_menu">Transfer Product</string>
     <string name="button_show_account_qr_main_menu">Show Account QR</string>
     <string name="button_qrcode_scan_main_menu">Scan QR Code</string>
+    <string name="button_product_current_holder">Find Current Product Holder</string>
+    <string name="button_product_seller">Find Product Seller</string>
 
     <string name="button_login">Login</string>
     <string name="button_add_product">Add Product</string>
-    <string name="button_logout">Logout</string>
-    <string name="button_next_main_menu">Next</string>
+    <string name="button_two">Button 2</string>
+    <string name="button_one">Button 1</string>
     <string name="button_qrcode_scan">Scan QR Code</string>
     <string name="button_nfc_tag_scan">Scan Tag</string>
     <string name="button_sale_checkout">Checkout</string>
@@ -56,17 +60,31 @@
     <string name="button_view_product_qr_code">View QR code</string>
 
     <string name="error_password">Password must contain at least 8 characters.</string>
-    <string name="error_buyer">Buyer name must be at least 8 characters long</string>
-    <string name="error_owner">Owner name must be at least 8 characters long</string>
-    <string name="error_new_buyer">new Buyer name must be at least 8 characters long</string>
+    <string name="error_node_address">A valid address must be entered</string>
+    <string name="error_username">Username must contain at least 2 characters.</string>
+    <string name="error_buyer">Please provide a memorable code of at least 8 characters</string>
+    <string name="error_owner">Owner memorable code must be at least 8 characters long</string>
+    <string name="error_new_buyer">new Buyer memorable code must be at least 8 characters long</string>
+    <string name="error_product_name">Product name must be at least 2 characters long</string>
+    <string name="error_seller_account_address">Seller name must be at least 2 characters long</string>
 
     <string name="text_view_suggestion_enter_account">or enter below</string>
+    <string name="text_view_origin_product_name">Product Name</string>
+    <string name="text_view_origin_product_website">Link to product website</string>
+    <string name="text_view_origin_product_manufacturer_name">Manufacturer Name</string>
+    <string name="text_view_origin_product_information">Product Information</string>
+    <string name="text_view_origin_product_tracking">Product Origin Tracker</string>
+    <string name="text_view_origin_transit_party_name">Transit Party</string>
+    <string name="text_view_origin_transit_party_date_received">Received on</string>
+    <string name="text_view_origin_transit_party_marker_color">Map Marker Color</string>
 
     <string name="qr_code_content">A QR Code Image</string>
     <string name="query_hello">Hello</string>
     <string name="query_accounts">Accounts</string>
     <string name="accounts_activity_title">Please select an account</string>
+    <string name="all_products_fragment_title">Please select a product to check its details</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

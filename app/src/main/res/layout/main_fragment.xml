@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipChildren="false"
+    android:elevation="0dp"
     android:clipToPadding="false"
     tools:context=".MainFragment">
 
     <LinearLayout
         style="@style/Widget.Provenance.Backdrop"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:paddingTop="88dp">
@@ -22,7 +23,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:elevation="0dp">
+        app:elevation="30dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/app_bar"
@@ -32,7 +33,9 @@
             android:paddingStart="12dp"
             android:paddingLeft="12dp"
             android:paddingEnd="12dp"
+            app:elevation="30dp"
             android:paddingRight="12dp"
+            app:layout_scrollFlags="scroll|enterAlways"
             app:contentInsetStart="0dp"
             app:navigationIcon="@drawable/menu_icon"
             app:title="@string/app_name" />
@@ -41,14 +44,16 @@
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nested_grid"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="56dp"
+        android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        android:elevation="8dp"
+        android:elevation="0dp"
+        android:clipToPadding="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+        <include
+            android:id="@+id/main_lay"
+            layout="@layout/main_menu_layout" />
 
-        <include layout="@layout/main_menu_layout"/>
     </androidx.core.widget.NestedScrollView>
 
-</FrameLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

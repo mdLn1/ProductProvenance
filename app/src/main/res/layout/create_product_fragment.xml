@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/loginPageBackgroundColor"
-    tools:context=".CreateProductFragment">
+    tools:context=".functional_fragments.CreateProductFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -44,6 +44,22 @@
                 android:inputType="text"
                 android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputLayoutProductLinkToMerch"
+        style="@style/Widget.Provenance.TextInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_link_to_merch">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/inputTextProductLinkToMerch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:inputType="text"
+            android:maxLines="1" />
+    </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonQRCodeScanSellerAccount"
             style="@style/Widget.Provenance.Button.Menu"

@@ -6,19 +6,15 @@ import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
-
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 public final class Utils {
 
@@ -70,5 +66,15 @@ public final class Utils {
         }
 
         return false;
+    }
+
+    public static String serializeTransitParty(TransitParty transitParty) {
+        Gson gson = new Gson();
+        return gson.toJson(transitParty);
+    }
+
+    public static TransitParty deserializeTransitParty(String transitParty) {
+        Gson gson = new Gson();
+        return gson.fromJson(transitParty, TransitParty.class);
     }
 }

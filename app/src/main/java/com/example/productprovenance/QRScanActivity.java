@@ -26,6 +26,7 @@ public class QRScanActivity extends AppCompatActivity implements ZXingScannerVie
 
     private static final int REQUEST_CAMERA = 1;
     private ZXingScannerView mScannerView;
+    private String result = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,19 +120,19 @@ public class QRScanActivity extends AppCompatActivity implements ZXingScannerVie
     @Override
     public void handleResult(Result rawResult) {
 
-        final String result = rawResult.getText();
+          result = rawResult.getText();
 //        Log.d("QRCodeScanner", rawResult.getText());
 //        Log.d("QRCodeScanner", rawResult.getBarcodeFormat().toString());
-
+        String data = "hehe";
         new MaterialAlertDialogBuilder(this)
                 .setTitle("Successfully scanned")
                 .setMessage("Do you wish to continue ?")
                 .setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent();
+                        Intent intent = getIntent();
                         intent.putExtra(Constants.GET_SCANNED_QR_DATA, result);
-                        setResult(RESULT_OK);
+                        setResult(RESULT_OK, intent);
                         finish();
                     }
                 })

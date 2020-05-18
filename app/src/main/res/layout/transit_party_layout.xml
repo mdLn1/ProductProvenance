@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="#ffffff"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="@string/text_view_origin_transit_party_name"
+        android:textAppearance="@style/TextAppearance.Provenance.Title"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewTransitParty"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
+        android:text="@string/text_view_origin_transit_party_name"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="@string/text_view_origin_transit_party_date_received"
+        android:textAppearance="@style/TextAppearance.Provenance.Title"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewTransitPartyDateReceived"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
+        android:text="@string/text_view_origin_transit_party_name"
+        />
+
+
+</LinearLayout>
